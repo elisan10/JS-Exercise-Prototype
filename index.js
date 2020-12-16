@@ -88,9 +88,13 @@ Person.prototype.toString = function(){
     this.tank = 0
     this.odometer = 0
   }
+  let fastCar = new Car('Ferrari', '25',)
+
   Car.prototype.fill = function(gallons){
-    return this.tank + gallons
+    return (this.tank = gallons + this.tank)
   }
+  
+  fastCar.fill(10)
 
   // Car.fill(10)
   // console.log(Person.tank)
