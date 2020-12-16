@@ -38,16 +38,35 @@ function Airplane(name) {
       - Give instances of Person a method `.toString()`:
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
-  
- function Person() {
-    
+  // step 1 we want to create a constructor function - it takes name and age as arguments and should also habe an empty stomach array 
+ function Person(name, age) {
+    this.name = name
+    this.age = age
+    this.stomach = []
   }
+Person.prototype.eat = function(food){
+  if(this.stomach.length < 10){
+    this.stomach.push(food)
+  }
+}
  
- 
+Person.prototype.poop = function(){
+  this.stomach = []
+} 
+Person.prototype.toString = function(){
+  return (`${this.name}, ${this.age}`)
+}
+// const personOne = new Person('Jakobi', 20)
+// const personTwo = new Person('Leah', 29)
+// const personThree = new Person('Karla', 24)
 
-  
-  
-  
+// personOne.eat('tacos')
+// personOne.eat('pizza')
+// personOne.eat('sushi')
+
+// console.log(personOne.stomach)
+// personOne.poop()
+// console.log(personOne.stomach)
   
   /*
     TASK 2
@@ -63,9 +82,18 @@ function Airplane(name) {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+ function Car(model, milesPerGallon) {
+    this.model = model
+    this.milesPerGallon = milesPerGallon
+    this.tank = 0
+    this.odometer = 0
   }
+  Car.prototype.fill = function(gallons){
+    return this.tank + gallons
+  }
+
+  // Car.fill(10)
+  // console.log(Person.tank)
   
   
   /*
@@ -75,18 +103,25 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
+ function Baby(name, age, favoriteToy) {
+   Person.call(this, name, age)
+   this.favoriteToy = favoriteToy
   }
+
+ Baby.prototype = Object.create(Person.prototype)
+ Baby.prototype.play = function(){
+   return (`Playing with ${this.favoriteToy}`)
+ }
+
  
-  
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Window Binding is where the 'this' keyword attaches to the window or a global object in node because of the scope and the context.
+    2. Implicit Binding is where the 'this' keyword will refer to whatever is on the left side of the dot. This is usually used in the scope of an object.
+    3. Explicit Binding is where the 'this' keyword will be defined when the call, apply, or bind method is used/invoked.
+    4. New Binding is where the 'this' keyword will refer to the new object that is created when new a constructor function is created. 
+      So it is used in the context of the new constructor function. 
   */
   
   
